@@ -75,14 +75,15 @@ const HomeScreen = (props) => {
   const [gameData, setGameData] = useState([]);
   const [leaderboard, setLeaderBoard] = useState([]);
   const [paymentArray, setPaymentArray] = useState([]);
+  const [settingData, setSettingData] = useState([]);
 
-  const settingData = [
-    { id: 1, iconName: 'surround-sound', description: 'Sound' },
-    { id: 2, iconName: 'rule', description: 'Game Rules' },
-    { id: 3, iconName: 'cubes', description: 'Buy More Coins' },
+  // const settingData = [
+  //   { id: 1, iconName: 'surround-sound', description: 'Sound' },
+  //   { id: 2, iconName: 'rule', description: 'Game Rules' },
+  //   { id: 3, iconName: 'cubes', description: 'Buy More Coins' },
 
-    // {id:2, iconName:"speaker-notes", description: "Instruction",Info:},
-  ];
+  //   // {id:2, iconName:"speaker-notes", description: "Instruction",Info:},
+  // ];
   // const [getUserDetail, setUserDetail] = useState(getData("User").User);
 
   const state = {
@@ -218,6 +219,7 @@ const HomeScreen = (props) => {
               updateGameRules(data.instruction);
               setLeaderBoard(data.LeaderBoard);
               setPaymentArray(data.paymentArray);
+              setSettingData(data.settingData);
             } else {
             }
           })
@@ -276,8 +278,6 @@ const HomeScreen = (props) => {
           getData("User").then(resUser => {
 
             console.log(resUser)
-
-
 
             let payload = {
               user_id: resUser.User.user_id,
@@ -454,7 +454,7 @@ const HomeScreen = (props) => {
             }}>
             Settings
           </Text>
-          <FlatList
+          {settingData.length > 0 && <FlatList
             style={styles.notificationList}
             data={settingData}
             keyExtractor={(item) => {
@@ -503,7 +503,7 @@ const HomeScreen = (props) => {
                 </TouchableOpacity>
               );
             }}
-          />
+          />}
 
 
           <TouchableOpacity
